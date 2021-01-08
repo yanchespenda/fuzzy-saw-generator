@@ -222,7 +222,7 @@ export class HomeComponent implements OnInit {
       this.criteriaDataSource.data.forEach(criteria => {
         criteriaList.push({
           code: criteria.code,
-          value: Math.floor(Math.random() * 1001) // 0
+          value: 0 //Math.floor(Math.random() * 1001) // 0
         })
       });
       const tempAlternate = {
