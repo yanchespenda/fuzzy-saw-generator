@@ -248,9 +248,6 @@ export class HomeComponent implements OnInit {
   }
 
   valueGenerate(): void {
-    // const generateParam = queryParamBuilder([
-      
-    // ]);
 
     const criteriaData = JSON.stringify(this.criteriaDataSource.data);
     const alternateData = JSON.stringify(this.alternateDataSource.data);
@@ -268,7 +265,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const tempDataSource: CriteriaDataSource[] = [
+    /* const tempDataSource: CriteriaDataSource[] = [
       {
         code: 'C1',
         name: 'Tes pengetahuan',
@@ -293,10 +290,10 @@ export class HomeComponent implements OnInit {
         weight: 15,
         type: 1,
       },
-    ];
-    this.criteriaDataSource = new MatTableDataSource(tempDataSource);
+    ]; */
+    this.criteriaDataSource = new MatTableDataSource([]);
 
-    const tempDataAlternate: AlternateDataSource[] = [
+    /* const tempDataAlternate: AlternateDataSource[] = [
       {
         code: 'A1',
         name: 'Kurosaki'
@@ -313,8 +310,8 @@ export class HomeComponent implements OnInit {
         code: 'A4',
         name: 'Barbara'
       },
-    ];
-    this.alternateDataSource = new MatTableDataSource(tempDataAlternate);
+    ]; */
+    this.alternateDataSource = new MatTableDataSource([]);
 
     this.valueComponentUpdate();
   }
