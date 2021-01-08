@@ -27,6 +27,9 @@ export class GenerateComponent implements OnInit {
   valueSourceStep2: SourceStep2[] = [];
   step2List: Step2List[] = [];
 
+  step3Alternate: string;
+  step3Rank: number;
+
   constructor(
     private activatedRoute: ActivatedRoute,
   ) {
@@ -169,7 +172,7 @@ export class GenerateComponent implements OnInit {
   }
 
   runStep2(): void {
-    console.log('this.valueSourceStep2', this.valueSourceStep2);
+    // console.log('this.valueSourceStep2', this.valueSourceStep2);
     this.valueSourceStep2.forEach(alternate => {
       let result = 0;
       let latextCriteria = [];
@@ -188,13 +191,27 @@ export class GenerateComponent implements OnInit {
 
       this.step2List.push(tempPush);
     });
-    console.log('this.step2List', this.step2List);
+    // console.log('this.step2List', this.step2List);
+  }
+
+  runStep3(): void {
+    let currentRank = 0;
+    this.step2List.forEach(value => {
+      if (value.result > currentRank) {
+        currentRank = value.result;
+
+        this.step3Alternate = value.alternateName;
+        this.step3Rank = value.result;
+      }
+    })
   }
 
   ngOnInit(): void {
     this.runStep1();
 
     this.runStep2();
+
+    this.runStep3();
   }
 
 }
