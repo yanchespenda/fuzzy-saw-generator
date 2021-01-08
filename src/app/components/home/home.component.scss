@@ -1,0 +1,15 @@
+@import '../../../styles/dataTableMixin';
+
+@include mat-table-columns((
+
+    code: (width: 10%),
+    name: (width: 60%, padding-left: 8px),
+    type: (width: 10%, padding-left: 8px),
+    weight: (width: 15%, padding-left: 8px),
+    actions: (width: 5%, padding-left: 8px),
+    nameAlternate: (width: 85%, padding-left: 8px)
+));
+
+.containerArea {
+    margin-top: 16px;
+}

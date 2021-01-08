@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>{{ isEditMode ? 'Edit Alternate' : 'Add Alternate' }}</h1>
+<div mat-dialog-content class="dialogContent">
+    <form [formGroup]="actionForm">
+        <mat-form-field class="fullSize" appearance="outline">
+            <mat-label>Code</mat-label>
+            <input formControlName="code" type="text" matInput value="" autocomplete="off" aria-label="Code" required>
+        </mat-form-field>
+        <mat-form-field class="fullSize marginInput" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input formControlName="name" type="text" matInput value="" autocomplete="off" aria-label="Name" required>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="onConfirm()">Save</button>
+</div>

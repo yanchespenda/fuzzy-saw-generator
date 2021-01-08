@@ -1,0 +1,120 @@
+<div class="container">
+    <div fxLayout="column">
+        <div class="containerArea" fxLayout="column">
+            <mat-toolbar>
+                <mat-toolbar-row>
+                    <span>
+                        STEP 1: MATRIX NORMALIZATION
+                    </span>
+                </mat-toolbar-row>
+            </mat-toolbar>
+            <mat-card fxFlex>
+                <mat-card-content fxLayout="column">
+                    <span class="mat-subheading-1 textCenter">Formula if criteria is benefit</span>
+                    <ng-katex [equation]="formulaStep1A" [options]="options"></ng-katex>
+
+                    <span class="mat-subheading-1 textCenter">Formula if criteria is cost</span>
+                    <ng-katex [equation]="formulaStep1B" [options]="options"></ng-katex>
+
+                    <div class="dividerMargin">
+                        <mat-divider></mat-divider>
+                    </div>
+
+                    <div fxLayout="column">
+                        <span class="mat-subheading-1 textCenter">Source Data</span>
+                        <mat-grid-list [cols]="valueGetLengthCriteria()" rowHeight="50px">
+                            <mat-grid-tile>Alternate \ Criteria</mat-grid-tile>
+                            <mat-grid-tile *ngFor="let criteria of valueSource">{{ criteria.code }}</mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list [cols]="valueGetLengthCriteria()" rowHeight="50px" *ngFor="let value of valueSource">
+                            <mat-grid-tile>{{ value.code }}</mat-grid-tile>
+                            <mat-grid-tile *ngFor="let criteria of value.list">
+                                {{ criteria.value }}
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </div>
+
+                    <div class="dividerMargin">
+                        <mat-divider></mat-divider>
+                    </div>
+
+                    <div fxLayout="column">
+                        <div *ngFor="let step of step1List" fxLayout="column">
+                            <span class="mat-subheading-1 textCenter textStep">{{ step.rowName }}</span>
+                            <ng-katex [equation]="step.latexText" [options]="options"></ng-katex>
+                        </div>
+                    </div>
+
+                    <div class="dividerMargin">
+                        <mat-divider></mat-divider>
+                    </div>
+
+                    <div fxLayout="column">
+                        <span class="mat-subheading-1 textCenter">Result</span>
+                        <mat-grid-list [cols]="valueGetLengthCriteria()" rowHeight="50px">
+                            <mat-grid-tile>Alternate \ Criteria</mat-grid-tile>
+                            <mat-grid-tile *ngFor="let criteria of valueSourceStep1">{{ criteria.code }}</mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list [cols]="valueGetLengthCriteria()" rowHeight="50px" *ngFor="let value of valueSourceStep1">
+                            <mat-grid-tile>{{ value.code }}</mat-grid-tile>
+                            <mat-grid-tile *ngFor="let criteria of value.list">
+                                {{ criteria.value }}
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </div>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="containerArea" fxLayout="column">
+            <mat-toolbar>
+                <mat-toolbar-row>
+                    <span>
+                        STEP 2: RATING SOURCE
+                    </span>
+                </mat-toolbar-row>
+            </mat-toolbar>
+            <mat-card fxFlex>
+                <mat-card-content fxLayout="column">
+                    <div fxLayout="column">
+                        <span class="mat-subheading-1 textCenter">Weight Criteria</span>
+                        <mat-grid-list [cols]="criteriaDataSource.length" rowHeight="50px">
+                            <mat-grid-tile *ngFor="let criteria of criteriaDataSource">{{ criteria.code }}</mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list [cols]="criteriaDataSource.length" rowHeight="50px">
+                            <mat-grid-tile *ngFor="let criteria of criteriaDataSource">{{ criteria.weight }}%</mat-grid-tile>
+                        </mat-grid-list>
+                    </div>
+
+                    <div class="dividerMargin">
+                        <mat-divider></mat-divider>
+                    </div>
+
+                    <div fxLayout="column">
+                        <div *ngFor="let step of step2List" fxLayout="column">
+                            <span class="mat-subheading-1 textCenter textStep">{{ step.alternateName }}</span>
+                            <ng-katex [equation]="step.latexText" [options]="options"></ng-katex>
+                        </div>
+                    </div>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="containerArea" fxLayout="column">
+            <mat-toolbar>
+                <mat-toolbar-row>
+                    <span>
+                        STEP 3: SUMMARY
+                    </span>
+                </mat-toolbar-row>
+            </mat-toolbar>
+            <mat-card fxFlex>
+                <mat-card-content fxLayout="column">
+                    
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

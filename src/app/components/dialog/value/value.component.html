@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Edit Value</h1>
+<div mat-dialog-content class="dialogContent">
+    <form [formGroup]="actionForm">
+        <mat-form-field class="fullSize" appearance="outline">
+            <mat-label>Value</mat-label>
+            <input formControlName="value" type="number" matInput value="" min="0" autocomplete="off" aria-label="Value" required>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="onConfirm()">Save</button>
+</div>

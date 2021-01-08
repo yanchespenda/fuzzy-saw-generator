@@ -1,0 +1,151 @@
+<div class="container">
+    <div fxLayout="column">
+        <div fxLayout="column">
+
+            <!-- Data Criteria -->
+            <div class="containerArea" fxLayout="column">
+                <mat-toolbar>
+                    <mat-toolbar-row>
+                        <span>
+                            Criteria {{ criterialWeightCurrent() > 0 ? (criterialWeightCurrent() < 100 ? '[Not valid]': '[Valid]') : '' }}
+                        </span>
+                        <span fxFlex></span>
+                        <button mat-icon-button (click)="criteriaToolbarNew()" aria-label="Criteria add" matTooltip="Add" matTooltipShowDelay="500">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </mat-toolbar-row>
+                </mat-toolbar>
+                <mat-card fxFlex>
+                    <mat-card-content fxLayout="column">
+                        <table fxFlex mat-table [dataSource]="criteriaDataSource">
+    
+                            <ng-container matColumnDef="code">
+                                <th mat-header-cell *matHeaderCellDef><span>Code</span></th>
+                                <td mat-cell *matCellDef="let element"><span>{{element.code}}</span></td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef><span>Name</span></th>
+                                <td mat-cell *matCellDef="let element"><span>{{element.name}}</span></td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="type">
+                                <th mat-header-cell *matHeaderCellDef><span>Type</span></th>
+                                <td mat-cell *matCellDef="let element"><span>{{criteriaType(element)}}</span></td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="weight">
+                                <th mat-header-cell *matHeaderCellDef><span>Weight</span></th>
+                                <td mat-cell *matCellDef="let element"><span>{{element.weight}}</span></td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="actions" stickyEnd>
+                                <th mat-header-cell *matHeaderCellDef class="actionTd"></th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-icon-button aria-label="Action menu" [matMenuTriggerFor]="menu">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </button>
+                                    <mat-menu #menu="matMenu" xPosition="before">
+                                        <button mat-menu-item (click)="criteriaTableAction(element, 'edit')">
+                                            <span>Edit</span>
+                                        </button>
+                                        <mat-divider></mat-divider>
+                                        <button mat-menu-item color="warn" (click)="criteriaTableAction(element, 'delete')">
+                                            <span color="warn">Delete</span>
+                                        </button>
+                                    </mat-menu>
+                                </td>
+                            </ng-container>
+    
+                            <tr mat-header-row *matHeaderRowDef="criteriaDisplayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: criteriaDisplayedColumns;"></tr>
+                        </table>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <!-- Data Alternate -->
+            <div class="containerArea" fxLayout="column">
+                <mat-toolbar>
+                    <mat-toolbar-row>
+                        <span>
+                            Alternate
+                        </span>
+                        <span fxFlex></span>
+                        <button mat-icon-button (click)="alternateToolbarNew()" aria-label="Alternate add" matTooltip="Add" matTooltipShowDelay="500">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </mat-toolbar-row>
+                </mat-toolbar>
+                <mat-card fxFlex>
+                    <mat-card-content fxLayout="column">
+                        <table fxFlex mat-table [dataSource]="alternateDataSource">
+    
+                            <ng-container matColumnDef="code">
+                                <th mat-header-cell *matHeaderCellDef><span>Code</span></th>
+                                <td mat-cell *matCellDef="let element"><span>{{element.code}}</span></td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="nameAlternate">
+                                <th mat-header-cell *matHeaderCellDef><span>Name</span></th>
+                                <td mat-cell *matCellDef="let element"><span>{{element.name}}</span></td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="actions" stickyEnd>
+                                <th mat-header-cell *matHeaderCellDef class="actionTd"></th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-icon-button aria-label="Action menu" [matMenuTriggerFor]="menu">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </button>
+                                    <mat-menu #menu="matMenu" xPosition="before">
+                                        <button mat-menu-item (click)="alternateTableAction(element, 'edit')">
+                                            <span>Edit</span>
+                                        </button>
+                                        <mat-divider></mat-divider>
+                                        <button mat-menu-item color="warn" (click)="alternateTableAction(element, 'delete')">
+                                            <span color="warn">Delete</span>
+                                        </button>
+                                    </mat-menu>
+                                </td>
+                            </ng-container>
+    
+                            <tr mat-header-row *matHeaderRowDef="alternateDisplayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: alternateDisplayedColumns;"></tr>
+                        </table>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <!-- Data Value -->
+            <div class="containerArea" fxLayout="column">
+                <mat-toolbar>
+                    <mat-toolbar-row>
+                        <span>
+                            Data Source
+                        </span>
+                        <span fxFlex></span>
+                        <button mat-button (click)="valueGenerate()" aria-label="Data Source Generate" matTooltip="Generate" matTooltipShowDelay="500">
+                            GENERATE RESULT
+                        </button>
+                    </mat-toolbar-row>
+                </mat-toolbar>
+                <mat-card fxFlex>
+                    <mat-card-content fxLayout="column">
+                        <mat-grid-list [cols]="valueGetLengthCriteria()" rowHeight="50px">
+                            <mat-grid-tile>Alternate \ Criteria</mat-grid-tile>
+                            <mat-grid-tile *ngFor="let criteria of criteriaDataSource.data">{{ criteria.code }}</mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list [cols]="valueGetLengthCriteria()" rowHeight="50px" *ngFor="let value of valueSource">
+                            <mat-grid-tile>{{ value.code }}</mat-grid-tile>
+                            <mat-grid-tile *ngFor="let criteria of value.list">
+                                <button mat-button aria-label="Edit data source" (click)="valueEdit(criteria)" matTooltip="Edit" matTooltipShowDelay="500">
+                                    {{ criteria.value }}
+                                </button>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
